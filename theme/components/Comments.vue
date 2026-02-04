@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, nextTick } from 'vue'
 import { useNav } from '@slidev/client'
 
 // Configuration - update these for your repo
@@ -15,10 +15,12 @@ onMounted(() => {
   checkReviewMode()
 })
 
-function checkReviewMode() {
+async function checkReviewMode() {
   const urlParams = new URLSearchParams(window.location.search)
   isReviewMode.value = urlParams.get('review') === 'true'
   if (isReviewMode.value) {
+    // Wait for Vue to render the container before loading utterances
+    await nextTick()
     loadUtterances()
   }
 }
