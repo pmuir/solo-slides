@@ -101,6 +101,16 @@ function loadUtterances() {
   flex: 1;
   overflow-y: auto;
   padding: 12px;
+  min-height: 200px;
+}
+
+/* Style the utterances iframe */
+.utterances-wrapper :deep(.utterances) {
+  max-width: 100%;
+}
+
+.utterances-wrapper :deep(.utterances-frame) {
+  min-height: 180px;
 }
 
 /* Dark mode support */
