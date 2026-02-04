@@ -28,7 +28,15 @@ async function checkReviewMode() {
 
 // Reload utterances when slide changes
 watch(currentSlideNo, () => {
-  if (isReviewMode.value) {
+  if (isReviewMode.value && !isMinimized.value) {
+    loadUtterances()
+  }
+})
+
+// Reload utterances when expanding from minimized state
+watch(isMinimized, async (minimized) => {
+  if (!minimized && isReviewMode.value) {
+    await nextTick()
     loadUtterances()
   }
 })
