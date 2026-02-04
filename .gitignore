@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.output/
+
+# Slidev cache
+.slidev/
+
+# MCP server build
+mcp-server/dist/
+
+# Environment variables
+.env
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Export files (keep in exports/ if needed)
+*.pdf
+*.pptx
+
+# Temporary files
+.tmp/
+.cache/

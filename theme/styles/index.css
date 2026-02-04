@@ -1,0 +1,197 @@
+/* Solo.io Slides Theme - Global Styles */
+
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+
+:root {
+  /* Solo.io Brand Colors */
+  --solo-bg-dark: #1a1f2e;
+  --solo-bg-card: #252a3a;
+  --solo-purple: #a855f7;
+  --solo-purple-dark: #7c3aed;
+  --solo-purple-glow: rgba(168, 85, 247, 0.3);
+  --solo-pink: #ec4899;
+  --solo-green: #22c55e;
+  --solo-red: #ef4444;
+  --solo-text: #ffffff;
+  --solo-text-muted: #9ca3af;
+  --solo-border: rgba(168, 85, 247, 0.4);
+  
+  /* Slidev mappings */
+  --slidev-theme-primary: var(--solo-purple);
+  --slidev-theme-primary-dark: var(--solo-purple-dark);
+  --slidev-theme-background: var(--solo-bg-dark);
+  --slidev-theme-background-alt: var(--solo-bg-card);
+  --slidev-theme-text: var(--solo-text);
+  --slidev-theme-text-secondary: var(--solo-text-muted);
+  --slidev-theme-accent: var(--solo-pink);
+  --slidev-theme-success: var(--solo-green);
+  --slidev-theme-error: var(--solo-red);
+  
+  /* Code block colors */
+  --slidev-code-background: #0d1117;
+  --slidev-code-font-size: 0.875rem;
+}
+
+/* Force dark mode - Solo.io slides are always dark */
+.slidev-layout,
+.slidev-page,
+#slide-container {
+  background: var(--solo-bg-dark) !important;
+  color: var(--solo-text);
+}
+
+/* Base typography */
+.slidev-layout {
+  font-family: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Headings */
+h1 {
+  font-weight: 700;
+  font-size: 3rem;
+  color: var(--solo-text);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 1.75rem;
+  color: var(--solo-text);
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--solo-text-muted);
+}
+
+/* Code blocks */
+code {
+  font-family: 'Fira Code', monospace;
+}
+
+/* Links */
+a {
+  color: var(--solo-purple);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--solo-pink);
+  text-decoration: underline;
+}
+
+/* Lists */
+ul, ol {
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+  color: var(--solo-text);
+}
+
+li::marker {
+  color: var(--solo-purple);
+}
+
+/* Solo.io Card Style */
+.solo-card {
+  background: var(--solo-bg-card);
+  border: 1px solid var(--solo-border);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+.solo-card-highlight {
+  background: var(--solo-bg-card);
+  border: 1px solid var(--solo-purple);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 0 30px var(--solo-purple-glow);
+}
+
+/* Product circles (for product showcase slides) */
+.solo-circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: var(--solo-bg-card);
+  border: 1px solid var(--solo-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.solo-circle-active {
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+}
+
+/* Comparison table styles */
+.solo-table-bad {
+  background: rgba(239, 68, 68, 0.1);
+  border-left: 3px solid var(--solo-red);
+}
+
+.solo-table-good {
+  background: rgba(34, 197, 94, 0.1);
+  border-left: 3px solid var(--solo-green);
+}
+
+/* Text utilities */
+.text-purple {
+  color: var(--solo-purple);
+}
+
+.text-pink {
+  color: var(--solo-pink);
+}
+
+.text-muted {
+  color: var(--solo-text-muted);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--solo-purple), var(--solo-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Grid utilities */
+.grid-2x3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+/* Subtitle/tagline style */
+.subtitle {
+  font-style: italic;
+  color: var(--solo-text-muted);
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Image constraints */
+.slidev-layout img {
+  max-width: 90%;
+  max-height: 50vh;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}

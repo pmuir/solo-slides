@@ -1,0 +1,21 @@
+{
+  "name": "solo-slides",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "dev": "pnpm --filter ./decks/* run dev",
+    "build": "pnpm --filter ./decks/* run build",
+    "export:pdf": "pnpm --filter ./decks/* run export:pdf",
+    "export:pptx": "pnpm --filter ./decks/* run export:pptx"
+  },
+  "devDependencies": {
+    "@slidev/cli": "^0.50.0",
+    "@slidev/theme-default": "^0.25.0",
+    "typescript": "^5.7.0"
+  },
+  "dependencies": {
+    "sharp": "^0.34.5"
+  }
+}

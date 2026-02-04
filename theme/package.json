@@ -1,0 +1,17 @@
+{
+  "name": "slidev-theme-solo",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=18.0.0",
+    "slidev": ">=0.50.0"
+  },
+  "slidev": {
+    "colorSchema": "dark",
+    "defaults": {
+      "fonts": {
+        "sans": "Figtree",
+        "mono": "Fira Code"
+      }
+    }
+  }
+}

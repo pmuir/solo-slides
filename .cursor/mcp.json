@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "solo-slides-images": {
+      "command": "node",
+      "args": ["/Users/petermuir/workspace/pmuir/solo-slides/mcp-server/dist/index.js"],
+      "cwd": "/Users/petermuir/workspace/pmuir/solo-slides"
+    }
+  }
+}

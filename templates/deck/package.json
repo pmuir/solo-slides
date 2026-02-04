@@ -1,0 +1,10 @@
+{
+  "name": "{{DECK_NAME}}",
+  "private": true,
+  "scripts": {
+    "dev": "slidev --open",
+    "build": "slidev build",
+    "export:pdf": "slidev export",
+    "export:pptx": "slidev export --format pptx"
+  }
+}
