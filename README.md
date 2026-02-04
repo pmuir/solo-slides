@@ -24,6 +24,28 @@ make dev DECK=sample
 make new-deck NAME=my-presentation
 ```
 
+## Importing from PDF
+
+Import an existing PDF presentation into Slidev format using Cursor:
+
+1. Ensure `pdftoppm` is installed (`make install` will check for this)
+2. Ask Cursor: "Import my-slides.pdf as the quarterly-review deck"
+
+Cursor will:
+- Convert each PDF page to an image
+- Analyze content using AI vision
+- Generate editable Slidev markdown
+- Offer to enhance slides with the theme
+
+**Requires poppler:**
+```bash
+# macOS
+brew install poppler
+
+# Linux
+apt-get install poppler-utils
+```
+
 ## Exporting Decks
 
 ### Export to PDF

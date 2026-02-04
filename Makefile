@@ -32,6 +32,20 @@ help:
 install:
 	@command -v pnpm >/dev/null 2>&1 || { echo "Installing pnpm via corepack..."; corepack enable; }
 	pnpm install
+	@echo ""
+	@echo "Checking system dependencies..."
+	@command -v pdftoppm >/dev/null 2>&1 && echo "✓ pdftoppm (poppler) installed" || { \
+		echo "⚠️  pdftoppm not found, installing..."; \
+		if [ "$$(uname)" = "Darwin" ]; then \
+			brew install poppler; \
+		elif command -v apt-get >/dev/null 2>&1; then \
+			sudo apt-get install -y poppler-utils; \
+		else \
+			echo "❌ Could not auto-install poppler. Please install manually:"; \
+			echo "   macOS: brew install poppler"; \
+			echo "   Linux: apt-get install poppler-utils"; \
+		fi; \
+	}
 
 # Development - specific deck
 dev:

@@ -92,12 +92,13 @@ interface GenerateImageArgs {
   deckName: string;
   filename: string;
   style?: string;
+  referenceImagePath?: string;
 }
 
 export async function generateSlideImage(
   args: GenerateImageArgs
 ): Promise<string> {
-  const { prompt, deckName, filename, style } = args;
+  const { prompt, deckName, filename, style, referenceImagePath } = args;
 
   const apiKey = process.env.GOOGLE_API_KEY;
   if (!apiKey) {
@@ -134,9 +135,55 @@ export async function generateSlideImage(
 
   try {
     const ai = new GoogleGenAI({ apiKey });
+    
+    // Build contents - either text-only or with reference image
+    let contents: Parameters<typeof ai.models.generateContent>[0]["contents"];
+    
+    if (referenceImagePath) {
+      // Load the reference image
+      const fullRefPath = path.join(REPO_ROOT, referenceImagePath);
+      if (!fs.existsSync(fullRefPath)) {
+        throw new Error(`Reference image not found: ${referenceImagePath}`);
+      }
+      
+      const imageBuffer = fs.readFileSync(fullRefPath);
+      const base64Image = imageBuffer.toString("base64");
+      
+      // Determine mime type from extension
+      const ext = path.extname(referenceImagePath).toLowerCase();
+      const mimeTypes: Record<string, string> = {
+        ".png": "image/png",
+        ".jpg": "image/jpeg",
+        ".jpeg": "image/jpeg",
+        ".gif": "image/gif",
+        ".webp": "image/webp",
+      };
+      const mimeType = mimeTypes[ext] || "image/png";
+      
+      // Include reference image with the prompt
+      contents = [
+        {
+          role: "user",
+          parts: [
+            {
+              inlineData: {
+                mimeType,
+                data: base64Image,
+              },
+            },
+            {
+              text: `This is a screenshot of the current slide. Generate an image that will complement this slide: ${fullPrompt}`,
+            },
+          ],
+        },
+      ];
+    } else {
+      contents = fullPrompt;
+    }
+    
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash-image",
-      contents: fullPrompt,
+      contents,
     });
 
     // Extract the image from the response

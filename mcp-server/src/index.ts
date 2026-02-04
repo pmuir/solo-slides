@@ -37,7 +37,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
       {
         name: "generate_slide_image",
         description:
-          "Generate an image using Gemini AI and save it to a slide deck's public folder",
+          "Generate an image using Gemini AI and save it to a slide deck's public folder. Can optionally use a reference image (like a slide screenshot) to provide visual context.",
         inputSchema: {
           type: "object",
           properties: {
@@ -57,6 +57,11 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
               type: "string",
               description:
                 "Optional style hints (e.g., 'flat illustration', 'photorealistic', 'diagram')",
+            },
+            referenceImagePath: {
+              type: "string",
+              description:
+                "Optional path to a reference image (e.g., slide screenshot) relative to repo root. The AI will use this for visual context when generating the image.",
             },
           },
           required: ["prompt", "deckName", "filename"],
@@ -118,6 +123,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             deckName: string;
             filename: string;
             style?: string;
+            referenceImagePath?: string;
           }
         );
         return {
