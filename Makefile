@@ -1,4 +1,4 @@
-.PHONY: install dev dev-all build build-all pdf pptx mcp-build mcp-dev deploy new-deck help
+.PHONY: install dev dev-all build build-all pdf pptx google-slides mcp-build mcp-dev deploy new-deck help ensure-playwright
 
 # Default target
 help:
@@ -15,6 +15,7 @@ help:
 	@echo "Export:"
 	@echo "  make pdf DECK=<name>     Export deck to PDF"
 	@echo "  make pptx DECK=<name>    Export deck to PPTX"
+	@echo "  make google-slides DECK=<name> [TITLE=\"...\"]  Export to Google Slides"
 	@echo ""
 	@echo "MCP Server:"
 	@echo "  make mcp-build           Build the MCP server"
@@ -65,19 +66,34 @@ build-all:
 	@echo "Creating index page..."
 	@./scripts/create-index.sh
 
+# Ensure Playwright browsers are installed
+ensure-playwright:
+	@pnpm exec playwright install chromium --only-shell >/dev/null 2>&1 || true
+
 # Export to PDF
-pdf:
+pdf: ensure-playwright
 ifndef DECK
 	$(error DECK is required. Usage: make pdf DECK=my-deck)
 endif
 	cd decks/$(DECK) && pnpm run export:pdf
 
 # Export to PPTX
-pptx:
+pptx: ensure-playwright
 ifndef DECK
 	$(error DECK is required. Usage: make pptx DECK=my-deck)
 endif
 	cd decks/$(DECK) && pnpm run export:pptx
+
+# Export to Google Slides
+google-slides: ensure-playwright
+ifndef DECK
+	$(error DECK is required. Usage: make google-slides DECK=my-deck)
+endif
+ifdef TITLE
+	cd mcp-server && pnpm exec tsx src/export-google-slides.ts $(DECK) --title "$(TITLE)"
+else
+	cd mcp-server && pnpm exec tsx src/export-google-slides.ts $(DECK)
+endif
 
 # MCP Server - build
 mcp-build:

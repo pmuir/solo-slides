@@ -192,6 +192,14 @@ This image was generated using the MCP server:
 
 ---
 
+# Istio Architecture
+
+Service mesh components and traffic flow:
+
+<img src="/istio-architecture.png" alt="Istio Architecture" style="max-height: 320px; width: auto; margin: 0 auto; display: block;" />
+
+---
+
 # Review Mode
 
 Add `?review=true` to the URL to enable commenting.

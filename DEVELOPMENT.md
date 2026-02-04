@@ -65,6 +65,31 @@ solo-slides/
 |---------|-------------|
 | `make pdf DECK=name` | Export deck to PDF |
 | `make pptx DECK=name` | Export deck to PPTX |
+| `make google-slides DECK=name` | Export deck to Google Slides |
+
+#### Google Slides Export Setup
+
+Export your Slidev decks directly to Google Slides for easy sharing:
+
+```bash
+make google-slides DECK=sample
+make google-slides DECK=sample TITLE="Q1 Review 2025"
+```
+
+**Setup:**
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/apis/credentials)
+2. Create a new OAuth 2.0 Client ID (Application type: **Desktop app**)
+3. Enable the [Google Drive API](https://console.cloud.google.com/apis/library/drive.googleapis.com)
+4. Add credentials to your `.env` file:
+   ```bash
+   GOOGLE_CLIENT_ID=your_client_id_here
+   GOOGLE_CLIENT_SECRET=your_client_secret_here
+   ```
+5. First export will open a browser for OAuth authorization
+6. Token is cached in `.google-token.json` for future exports
+
+**Note**: Slides are exported as images (not editable text) due to Slidev's PPTX export format.
 
 ### MCP Server
 
@@ -196,7 +221,7 @@ Ask Cursor to generate images:
 - "Create a hero image with a futuristic tech theme"
 - "List all images in the sample deck"
 
-The MCP server provides three tools:
+The MCP server provides these tools:
 
 | Tool | Description |
 |------|-------------|

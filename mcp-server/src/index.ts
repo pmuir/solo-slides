@@ -17,7 +17,6 @@ import {
 import { generateSlideImage } from "./tools/generate-image.js";
 import { improveSlideImage } from "./tools/improve-image.js";
 import { listDeckImages } from "./tools/list-images.js";
-import { exportToGoogleSlides } from "./tools/export-to-google-slides.js";
 
 const server = new Server(
   {
@@ -102,31 +101,6 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
           required: ["deckName"],
         },
       },
-      {
-        name: "export_to_google_slides",
-        description:
-          "Export a Slidev deck to Google Slides. Exports the deck to PPTX format, then uploads and converts it to Google Slides.",
-        inputSchema: {
-          type: "object",
-          properties: {
-            deckName: {
-              type: "string",
-              description: "Name of the deck to export (folder name in decks/)",
-            },
-            title: {
-              type: "string",
-              description:
-                "Optional title for the Google Slides presentation. Defaults to deck name.",
-            },
-            folderId: {
-              type: "string",
-              description:
-                "Optional Google Drive folder ID to save the presentation in",
-            },
-          },
-          required: ["deckName"],
-        },
-      },
     ],
   };
 });
@@ -168,19 +142,6 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const result = await listDeckImages(
           args as {
             deckName: string;
-          }
-        );
-        return {
-          content: [{ type: "text", text: result }],
-        };
-      }
-
-      case "export_to_google_slides": {
-        const result = await exportToGoogleSlides(
-          args as {
-            deckName: string;
-            title?: string;
-            folderId?: string;
           }
         );
         return {

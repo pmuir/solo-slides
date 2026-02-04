@@ -1,4 +1,4 @@
-import { google } from "googleapis";
+import { google, Auth } from "googleapis";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import * as http from "node:http";
@@ -15,16 +15,16 @@ const SCOPES = ["https://www.googleapis.com/auth/drive.file"];
 
 interface StoredToken {
   access_token: string;
-  refresh_token: string;
-  scope: string;
-  token_type: string;
-  expiry_date: number;
+  refresh_token?: string;
+  scope?: string;
+  token_type?: string;
+  expiry_date?: number;
 }
 
 /**
  * Get OAuth2 client with stored credentials or initiate auth flow
  */
-export async function getGoogleAuth(): Promise<ReturnType<typeof google.auth.OAuth2.prototype.setCredentials> & { credentials: StoredToken }> {
+export async function getGoogleAuth(): Promise<Auth.OAuth2Client> {
   const clientId = process.env.GOOGLE_CLIENT_ID;
   const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
 
@@ -60,7 +60,7 @@ export async function getGoogleAuth(): Promise<ReturnType<typeof google.auth.OAu
       }
     }
     
-    return oauth2Client as any;
+    return oauth2Client;
   }
 
   // No token exists, need to authenticate
@@ -71,8 +71,8 @@ export async function getGoogleAuth(): Promise<ReturnType<typeof google.auth.OAu
  * Open browser for OAuth flow and wait for callback
  */
 async function authenticateWithBrowser(
-  oauth2Client: InstanceType<typeof google.auth.OAuth2>
-): Promise<any> {
+  oauth2Client: Auth.OAuth2Client
+): Promise<Auth.OAuth2Client> {
   const authUrl = oauth2Client.generateAuthUrl({
     access_type: "offline",
     scope: SCOPES,

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, watch, nextTick } from 'vue'
+import { ref, onMounted, watch, nextTick, computed } from 'vue'
 import { useNav } from '@slidev/client'
 
 // Configuration - update these for your repo
@@ -11,6 +11,12 @@ const containerRef = ref<HTMLDivElement>()
 const isReviewMode = ref(false)
 const isMinimized = ref(false)
 const isPresentationMode = ref(false)
+
+// Hide UI elements during export (Playwright sets navigator.webdriver = true)
+const isExporting = computed(() => {
+  if (typeof navigator === 'undefined') return true
+  return navigator.webdriver === true
+})
 
 // Check for review mode query parameter and set up fullscreen listener
 onMounted(() => {
@@ -80,7 +86,7 @@ async function togglePresentationMode() {
 </script>
 
 <template>
-  <div>
+  <div v-if="!isExporting">
     <!-- Non-review mode: presentation mode button -->
     <template v-if="!isReviewMode">
       <button 
@@ -333,4 +339,5 @@ async function togglePresentationMode() {
   background: #4a5568;
   color: #e2e8f0;
 }
+
 </style>
