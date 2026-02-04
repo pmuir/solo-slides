@@ -187,7 +187,7 @@ Images are automatically saved to your deck's `public/` folder.
 
 This image was generated using the MCP server:
 
-<img src="./microservices-architecture.png" alt="Microservices Architecture" style="max-height: 320px; width: auto; margin: 0 auto; display: block;" />
+<img src="/microservices-architecture.png" alt="Microservices Architecture" style="max-height: 320px; width: auto; margin: 0 auto; display: block;" />
 
 ---
 
