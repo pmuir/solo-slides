@@ -77,3 +77,42 @@ cat >> dist/index.html << 'EOF'
 EOF
 
 echo "Index page created at dist/index.html"
+
+# Create 404.html for SPA routing on GitHub Pages
+# This redirects deep links back to the correct deck's index
+cat > dist/404.html << 'EOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <script>
+    // Handle SPA routing for GitHub Pages
+    // Extract the path and redirect to the deck with hash-based routing
+    const path = window.location.pathname;
+    const base = '/solo-slides';
+    
+    if (path.startsWith(base)) {
+      const relativePath = path.slice(base.length);
+      const parts = relativePath.split('/').filter(Boolean);
+      
+      if (parts.length > 0) {
+        const deck = parts[0];
+        const slideNum = parts[1] || '1';
+        // Redirect to the deck with the slide number
+        window.location.replace(base + '/' + deck + '/#/' + slideNum + window.location.search);
+      } else {
+        window.location.replace(base + '/');
+      }
+    } else {
+      window.location.replace(base + '/');
+    }
+  </script>
+</head>
+<body>
+  <p>Redirecting...</p>
+</body>
+</html>
+EOF
+
+echo "404.html created for SPA routing"
