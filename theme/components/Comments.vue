@@ -10,10 +10,16 @@ const { currentSlideNo } = useNav()
 const containerRef = ref<HTMLDivElement>()
 const isReviewMode = ref(false)
 const isMinimized = ref(false)
+const isPresentationMode = ref(false)
 
-// Check for review mode query parameter
+// Check for review mode query parameter and set up fullscreen listener
 onMounted(() => {
   checkReviewMode()
+  
+  // Listen for fullscreen changes (e.g., user presses Escape)
+  document.addEventListener('fullscreenchange', () => {
+    isPresentationMode.value = !!document.fullscreenElement
+  })
 })
 
 async function checkReviewMode() {
@@ -61,39 +67,79 @@ function loadUtterances() {
 function toggleMinimized() {
   isMinimized.value = !isMinimized.value
 }
+
+async function togglePresentationMode() {
+  if (!document.fullscreenElement) {
+    await document.documentElement.requestFullscreen()
+    isPresentationMode.value = true
+  } else {
+    await document.exitFullscreen()
+    isPresentationMode.value = false
+  }
+}
 </script>
 
 <template>
-  <div v-if="isReviewMode">
-    <!-- Minimized state: just a floating button -->
-    <button 
-      v-if="isMinimized" 
-      class="comments-toggle-btn"
-      @click="toggleMinimized"
-      title="Open comments"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-      </svg>
-      <span class="toggle-badge">Review</span>
-    </button>
+  <div>
+    <!-- Non-review mode: presentation mode button -->
+    <template v-if="!isReviewMode">
+      <button 
+        v-if="!isPresentationMode"
+        class="presentation-toggle-btn"
+        @click="togglePresentationMode"
+        title="Enter Presentation Mode"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <polyline points="9 21 3 21 3 15"></polyline>
+          <line x1="21" y1="3" x2="14" y2="10"></line>
+          <line x1="3" y1="21" x2="10" y2="14"></line>
+        </svg>
+      </button>
+      <button 
+        v-else
+        class="presentation-exit-btn"
+        @click="togglePresentationMode"
+        title="Exit Presentation Mode"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="4 14 10 14 10 20"></polyline>
+          <polyline points="20 10 14 10 14 4"></polyline>
+          <line x1="14" y1="10" x2="21" y2="3"></line>
+          <line x1="3" y1="21" x2="10" y2="14"></line>
+        </svg>
+      </button>
+    </template>
 
-    <!-- Expanded state: full comment panel -->
-    <div v-else class="comments-container">
-      <div class="comments-header">
-        <span class="review-badge">Review Mode</span>
-        <span class="review-hint">Slide {{ currentSlideNo }}</span>
-        <button class="minimize-btn" @click="toggleMinimized" title="Minimize">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="4 14 10 14 10 20"></polyline>
-            <polyline points="20 10 14 10 14 4"></polyline>
-            <line x1="14" y1="10" x2="21" y2="3"></line>
-            <line x1="3" y1="21" x2="10" y2="14"></line>
-          </svg>
-        </button>
+    <!-- Review mode: comments panel -->
+    <template v-else>
+      <!-- Minimized state: just a floating button -->
+      <button 
+        v-if="isMinimized" 
+        class="comments-toggle-btn"
+        @click="toggleMinimized"
+        title="Open comments"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <span class="toggle-badge">Review</span>
+      </button>
+
+      <!-- Expanded state: full comment panel -->
+      <div v-else class="comments-container">
+        <div class="comments-header">
+          <span class="review-badge">Review Mode</span>
+          <span class="review-hint">Slide {{ currentSlideNo }}</span>
+          <button class="header-btn" @click="toggleMinimized" title="Minimize">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </button>
+        </div>
+        <div ref="containerRef" class="utterances-wrapper"></div>
       </div>
-      <div ref="containerRef" class="utterances-wrapper"></div>
-    </div>
+    </template>
   </div>
 </template>
 
@@ -176,7 +222,7 @@ function toggleMinimized() {
   flex: 1;
 }
 
-.minimize-btn {
+.header-btn {
   background: transparent;
   border: none;
   color: #718096;
@@ -189,9 +235,60 @@ function toggleMinimized() {
   transition: all 0.2s;
 }
 
-.minimize-btn:hover {
+.header-btn:hover {
   background: #e2e8f0;
   color: #4a5568;
+}
+
+/* Presentation mode toggle button (enter) */
+.presentation-toggle-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 22px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: all 0.2s ease;
+  opacity: 0.6;
+}
+
+.presentation-toggle-btn:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.7);
+  transform: scale(1.05);
+}
+
+/* Presentation mode exit button (subtle) */
+.presentation-exit-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: all 0.2s ease;
+  opacity: 0;
+}
+
+.presentation-exit-btn:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .utterances-wrapper {
@@ -228,11 +325,11 @@ function toggleMinimized() {
   color: #a0aec0;
 }
 
-.dark .minimize-btn {
+.dark .header-btn {
   color: #a0aec0;
 }
 
-.dark .minimize-btn:hover {
+.dark .header-btn:hover {
   background: #4a5568;
   color: #e2e8f0;
 }
