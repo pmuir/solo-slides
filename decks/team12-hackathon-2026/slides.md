@@ -11,7 +11,7 @@ mdc: true
 routerMode: hash
 ---
 
-<img src="/slide-1-bg-clean.png" alt="" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.45; z-index: 0; pointer-events: none;" />
+<img src="/slide-1-bg-wide.png" alt="" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; max-width: none; max-height: none; object-fit: cover; opacity: 0.5; z-index: 0; pointer-events: none;" />
 
 <img src="/corner-glow-accent.png" alt="" style="position: fixed; right: -50px; bottom: -50px; height: 400px; opacity: 0.6; z-index: 0; pointer-events: none;" />
 
@@ -27,7 +27,7 @@ routerMode: hash
   <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem; margin: 0;">Our AI agent analyses <strong style="color: white;">Gong, Salesforce, Slack, and internal docs</strong> to generate a custom portal for each prospect—turning institutional knowledge into <strong style="color: #a855f7;">faster POCs</strong> and <strong style="color: #a855f7;">higher win rates</strong>.</p>
 </div>
 
-<div style="margin-top: 2rem; display: flex; gap: 1rem;">
+<div style="margin-top: 1rem; display: flex; gap: 1rem;">
   <span style="padding: 0.5rem 1.25rem; border-radius: 9999px; background: #a855f7; color: white; font-weight: 500; font-size: 0.85rem; box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);">Team 12</span>
   <span style="padding: 0.5rem 1.25rem; border-radius: 9999px; background: rgba(255,255,255,0.15); color: white; font-weight: 500; font-size: 0.85rem; backdrop-filter: blur(4px);">Most Impactful Internal Solution</span>
 </div>
