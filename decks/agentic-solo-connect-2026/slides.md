@@ -11,12 +11,20 @@ mdc: true
 routerMode: hash
 ---
 
-# AI & Agentic Infrastructure
+<img src="/slide-1-bg-neural-network.png" alt="" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; z-index: 0; pointer-events: none;" />
 
-Build, manage, and scale intelligent agents securely and natively in Kubernetes.
+<img src="/corner-glow-accent.png" alt="" style="position: fixed; right: -50px; bottom: -50px; height: 400px; opacity: 0.6; z-index: 0; pointer-events: none;" />
 
-<div class="mt-8">
-  <span class="px-4 py-2 rounded-full bg-white text-gray-900 font-medium">AI & Agentic</span>
+<div style="position: relative; z-index: 10; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; min-height: 80vh; text-align: center;">
+
+<h1 style="font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; text-shadow: 0 4px 12px rgba(0,0,0,0.6), 0 0 40px rgba(168, 85, 247, 0.3);">AI & Agentic Infrastructure</h1>
+
+<p style="font-size: 1.25rem; color: rgba(255,255,255,0.85); max-width: 600px; text-shadow: 0 2px 8px rgba(0,0,0,0.5);">Build, manage, and scale intelligent agents securely and natively in Kubernetes.</p>
+
+<div style="margin-top: 2rem;">
+  <span style="padding: 0.5rem 1.5rem; border-radius: 9999px; background: white; color: #1a1a2e; font-weight: 500; box-shadow: 0 0 20px rgba(168, 85, 247, 0.4), 0 4px 12px rgba(0,0,0,0.3);">AI & Agentic</span>
+</div>
+
 </div>
 
 ---
@@ -131,45 +139,76 @@ layout: default
 layout: default
 ---
 
-# Two Problems, Every Single Time
+<img src="/slide-5-bg-scattered-clouds.png" alt="" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.42; z-index: 0; pointer-events: none;" />
 
-<p class="subtitle">DISCOVERY & REGISTRY</p>
+<img src="/corner-glow-accent.png" alt="" style="position: fixed; right: -50px; bottom: -50px; height: 400px; opacity: 0.65; z-index: 0; pointer-events: none;" />
 
-<div class="mt-4 p-4 border-l-4 border-purple-500 bg-gray-900 rounded">
-  <div class="flex justify-between items-center mb-2">
-    <strong>Agent Sprawl Across Clouds</strong>
-    <span class="text-purple-400 text-sm font-semibold">PROBLEM</span>
+<div style="position: relative; z-index: 10;">
+
+<h1 style="margin-bottom: 0.25rem; text-shadow: 0 2px 8px rgba(0,0,0,0.5);">Two Problems, Every Single Time</h1>
+
+<p class="subtitle" style="margin-bottom: 0.5rem;">DISCOVERY & REGISTRY</p>
+
+<div style="background: rgba(30, 30, 40, 0.95); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 0.5rem; padding: 0.5rem 0.75rem; font-size: 0.85rem; box-shadow: 0 0 12px rgba(168, 85, 247, 0.1);">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+    <strong style="font-size: 0.9rem;">Agent Sprawl Across Clouds</strong>
+    <span style="color: var(--solo-purple); font-size: 0.65rem; font-weight: 600;">PROBLEM</span>
   </div>
-  <ul class="text-gray-400 text-sm">
+  <ul style="margin: 0; padding-left: 1.25rem; color: var(--solo-text-muted); font-size: 0.75rem; line-height: 1.4;">
     <li>Agents everywhere: K8s, Vertex, AgentCore</li>
     <li>No visibility into what's running</li>
     <li>Teams rebuild the same thing</li>
   </ul>
 </div>
 
-<div class="flex gap-4 mt-6">
-  <div class="flex-1 p-4 border-l-4 border-purple-500 bg-gray-900 rounded">
-    <div class="flex justify-between items-center mb-2">
-      <strong>Single Control Plane</strong>
-      <span class="text-purple-400 text-sm font-semibold">SOLUTION</span>
+<div style="display: flex; justify-content: space-around; padding: 0.5rem 0;">
+  <svg width="40" height="40" viewBox="0 0 40 40" style="filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.8));">
+    <defs>
+      <linearGradient id="arrowGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#a855f7;stop-opacity:0.6" />
+        <stop offset="100%" style="stop-color:#a855f7;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+    <line x1="20" y1="5" x2="20" y2="30" stroke="url(#arrowGrad3)" stroke-width="3" stroke-linecap="round"/>
+    <polyline points="10,22 20,35 30,22" fill="none" stroke="#a855f7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg width="40" height="40" viewBox="0 0 40 40" style="filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.8));">
+    <defs>
+      <linearGradient id="arrowGrad4" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#a855f7;stop-opacity:0.6" />
+        <stop offset="100%" style="stop-color:#a855f7;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+    <line x1="20" y1="5" x2="20" y2="30" stroke="url(#arrowGrad4)" stroke-width="3" stroke-linecap="round"/>
+    <polyline points="10,22 20,35 30,22" fill="none" stroke="#a855f7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</div>
+
+<div style="display: flex; gap: 0.5rem; font-size: 0.85rem;">
+  <div style="flex: 1; background: rgba(30, 30, 40, 0.95); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 0.5rem; padding: 0.5rem 0.75rem; box-shadow: 0 0 12px rgba(168, 85, 247, 0.1);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+      <strong style="font-size: 0.9rem;">Single Control Plane</strong>
+      <span style="color: var(--solo-purple); font-size: 0.65rem; font-weight: 600;">SOLUTION</span>
     </div>
-    <ul class="text-gray-400 text-sm">
+    <ul style="margin: 0; padding-left: 1.25rem; color: var(--solo-text-muted); font-size: 0.75rem; line-height: 1.4;">
       <li>See everything (even old stuff)</li>
       <li>Unified catalog across clouds</li>
       <li>Semantic search for reuse</li>
     </ul>
   </div>
-  <div class="flex-1 p-4 border-l-4 border-purple-500 bg-gray-900 rounded">
-    <div class="flex justify-between items-center mb-2">
-      <strong>Deploy Anywhere</strong>
-      <span class="text-purple-400 text-sm font-semibold">SOLUTION</span>
+  <div style="flex: 1; background: rgba(30, 30, 40, 0.95); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 0.5rem; padding: 0.5rem 0.75rem; box-shadow: 0 0 12px rgba(168, 85, 247, 0.1);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+      <strong style="font-size: 0.9rem;">Deploy Anywhere</strong>
+      <span style="color: var(--solo-purple); font-size: 0.65rem; font-weight: 600;">SOLUTION</span>
     </div>
-    <ul class="text-gray-400 text-sm">
+    <ul style="margin: 0; padding-left: 1.25rem; color: var(--solo-text-muted); font-size: 0.75rem; line-height: 1.4;">
       <li>Build once, deploy to any cloud</li>
       <li>K8s, Vertex, AgentCore from single UI</li>
       <li>Unified governance & observability</li>
     </ul>
   </div>
+</div>
+
 </div>
 
 ---
